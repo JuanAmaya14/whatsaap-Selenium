@@ -5,6 +5,9 @@ import unittest
 from selenium import webdriver
 
 
+name = input('Nombre de contacto o grupo: ') #Pedir nombre del un grupo o contacto (no se puede con caracteres especiales como emojis)
+
+
 #clase de pasos a seguir
 class SendMessage(unittest.TestCase):
     
@@ -21,19 +24,21 @@ class SendMessage(unittest.TestCase):
 
         sleep(10) #espera mientras escaneas el codigo QR 
 
-        #busca el primer chat que este en tu whatsapp por medio del selector CSS
-        chat = driver.find_element_by_css_selector('#pane-side > div:nth-child(1) > div > div > div:nth-child(10) > div > div > div._3OvU8')
+        #busca el contacto o grupo que pusiste anteriormente
+        chat = driver.find_element_by_xpath('//span[@title = "{}"]'.format(name))
         self.assertTrue(chat.is_enabled()) #verifica que este habilitado
         chat.click() #le da click al primer chat que encuentra
+
+        Encontrado = 0
+
        
         #Busca la barra para escribir el mensaje
-        Text = driver.find_element_by_css_selector('#main > footer > div._2BU3P.tm2tP.copyable-area > div > div > div._2lMWa > div.p3_M1 > div > div._13NKt.copyable-text.selectable-text')        
-        Text.click() #Le da click a la barra de mensaje
+        Text = driver.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[2]')     
+        Text.click()
         Text.send_keys('this message was sent by Selenium in python') #En esa misma barra escribe el texto
 
-
         #busca el boton para enviar el mensaje
-        send = driver.find_element_by_css_selector('#main > footer > div._2BU3P.tm2tP.copyable-area > div > div > div._2lMWa > div._3HQNh._1Ae7k > button')
+        send = driver.find_element_by_class_name('_4sWnG')
         
 
         sleep(3) #espera
