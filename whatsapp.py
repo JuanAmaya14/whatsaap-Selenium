@@ -4,9 +4,7 @@ from time import sleep
 import unittest
 from selenium import webdriver
 
-
 name = input('Nombre de contacto o grupo: ') #Pedir nombre del un grupo o contacto (no se puede con caracteres especiales como emojis)
-
 
 #clase de pasos a seguir
 class SendMessage(unittest.TestCase):
@@ -26,7 +24,7 @@ class SendMessage(unittest.TestCase):
 
         #busca el contacto o grupo que pusiste anteriormente
         chat = driver.find_element_by_xpath('//span[@title = "{}"]'.format(name))
-        self.assertTrue(chat.is_enabled()) #verifica que este habilitado
+        self.assertTrue(chat.is_enabled()) #verifica que este habilitada
         chat.click() #le da click al primer chat que encuentra
 
         Encontrado = 0
